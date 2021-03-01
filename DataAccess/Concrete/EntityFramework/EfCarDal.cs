@@ -31,7 +31,6 @@ namespace DataAccess.Concrete.EntityFramework
                                  Description = ca.Description
                              };
 
-
                 return result.ToList();
             }
         }
