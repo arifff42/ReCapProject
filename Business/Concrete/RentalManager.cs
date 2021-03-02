@@ -3,6 +3,7 @@ using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -10,6 +11,7 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
+        
 
         public RentalManager(IRentalDal rentalDal)
         {
@@ -18,7 +20,15 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            _rentalDal.Add(rental);
+            if (rental.ReturnDate==null)
+            {
+                //System.Console.WriteLine("Bu araç şuan da kiralık.");
+                return new ErrorResult("Bu araç şuan da kiralık.");
+            }
+            else
+            {
+                _rentalDal.Add(rental);                
+            }
 
             return new SuccessResult();
         }
@@ -56,6 +66,13 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
 
             return new SuccessResult();
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            var result = _rentalDal.GetRentalDetails();
+
+            return new SuccessDataResult<List<RentalDetailDto>>(result);
         }
     }
 }
