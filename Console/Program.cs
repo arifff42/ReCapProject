@@ -16,6 +16,14 @@ namespace Console
     {
         static void Main(string[] args)
         {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            Rental rental1 = new Rental() { CarId=5, CustomerId = 1, RentDate = Convert.ToDateTime("03.03.2021") };
+            Rental rental2 = new Rental() { Id=4,  ReturnDate = Convert.ToDateTime("03.03.2021") };
+
+            rentalManager.Add(rental1);
+            //rentalManager.Update(rental2);
+            //rentalManager.Delete(rental2);
 
             RentalGetAll();
 

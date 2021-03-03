@@ -5,6 +5,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -15,21 +16,33 @@ namespace Business.Concrete
 
         public RentalManager(IRentalDal rentalDal)
         {
-            _rentalDal = rentalDal;
+            _rentalDal = rentalDal;            
         }
 
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate==null)
+            foreach (var p in _rentalDal.GetAll(p => p.CarId == rental.CarId))
             {
-                //System.Console.WriteLine("Bu araç şuan da kiralık.");
-                return new ErrorResult("Bu araç şuan da kiralık.");
-            }
-            else
-            {
-                _rentalDal.Add(rental);                
+                foreach (var a in _rentalDal.GetAll(a => a.ReturnDate==rental.ReturnDate))
+                {
+                    if (a.ReturnDate==null)
+                    {                    
+                        System.Console.WriteLine("Bu araç şuan da kiralık.");
+                        //return new ErrorResult("Bu araç şuan da kiralık.");
+                    }
+                }
             }
 
+            //if (rental.ReturnDate.Value==null)
+            //{
+            //    //System.Console.WriteLine("Bu araç şuan da kiralık.");
+            //    return new ErrorResult("Bu araç şuan da kiralık.");
+            //}
+            //else
+            //{
+                _rentalDal.Add(rental);
+            //}
+            System.Console.WriteLine("Araç Kiralandı");
             return new SuccessResult();
         }
 
@@ -74,5 +87,10 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<RentalDetailDto>>(result);
         }
+
+        //public IDataResult<List<Rental>> GetCarId(int Id)
+        //{
+        //   // var result = _rentalDal.g
+        //}
     }
 }
