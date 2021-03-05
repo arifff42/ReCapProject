@@ -12,36 +12,30 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
-        
+
 
         public RentalManager(IRentalDal rentalDal)
         {
-            _rentalDal = rentalDal;            
+            _rentalDal = rentalDal;
         }
 
         public IResult Add(Rental rental)
         {
-            foreach (var p in _rentalDal.GetAll(p => p.CarId == rental.CarId))
+            foreach (var p in _rentalDal.GetAll(p => p.CarId == rental.CarId).Where(p => p.ReturnDate == null)) 
             {
-                foreach (var a in _rentalDal.GetAll(a => a.ReturnDate==rental.ReturnDate))
+                if (p.ReturnDate.Value <= p.RentDate)
                 {
-                    if (a.ReturnDate==null)
-                    {                    
-                        System.Console.WriteLine("Bu araç şuan da kiralık.");
-                        //return new ErrorResult("Bu araç şuan da kiralık.");
-                    }
+                    System.Console.WriteLine("Teslim Tarihi, Kiralama Tarihinden Önce Olamaz.");
+                    return new ErrorResult("Teslim Tarihi, Kiralama Tarihinden Önce Olamaz.");
+                }
+                else
+                {
+                    System.Console.WriteLine("Bu araç şuan da kiralık.");
+                    return new ErrorResult("Bu araç şuan da kiralık.");
                 }
             }
 
-            //if (rental.ReturnDate.Value==null)
-            //{
-            //    //System.Console.WriteLine("Bu araç şuan da kiralık.");
-            //    return new ErrorResult("Bu araç şuan da kiralık.");
-            //}
-            //else
-            //{
-                _rentalDal.Add(rental);
-            //}
+            _rentalDal.Add(rental);
             System.Console.WriteLine("Araç Kiralandı");
             return new SuccessResult();
         }
@@ -49,7 +43,7 @@ namespace Business.Concrete
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
-
+            System.Console.WriteLine("Silindi");
             return new SuccessResult();
         }
 
@@ -76,9 +70,17 @@ namespace Business.Concrete
 
         public IResult Update(Rental rental)
         {
-            _rentalDal.Update(rental);
-
-            return new SuccessResult();
+            if (rental.ReturnDate <= rental.RentDate)
+            {
+                System.Console.WriteLine("Teslim Tarihi, Kiralama Tarihinden Önce Olamaz.");
+                return new ErrorResult("Teslim Tarihi, Kiralama Tarihinden Önce Olamaz.");
+            }
+            else
+            {
+                _rentalDal.Update(rental);
+                System.Console.WriteLine("Güncellendi");
+                return new SuccessResult();
+            }
         }
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()

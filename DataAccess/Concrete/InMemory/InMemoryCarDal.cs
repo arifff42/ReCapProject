@@ -17,11 +17,11 @@ namespace DataAccess.Concrete.InMemory
         public InMemoryCarDal()
         {    
             _cars = new List<Car> {
-                new Car {CarId=1, BrandId=1, ColorId=2, ModelYear=2016, DailyPrice=250000, Description="BMW X6"},
-                new Car {CarId=2, BrandId=2, ColorId=3, ModelYear=2017, DailyPrice=350000, Description="Mercedes S600" },
-                new Car {CarId=3, BrandId=3, ColorId=4, ModelYear=2018, DailyPrice=450000, Description="Porche S4" },
-                new Car {CarId=4, BrandId=4, ColorId=5, ModelYear=2019, DailyPrice=550000, Description="Ferrari"  },
-                new Car {CarId=5, BrandId=5, ColorId=6, ModelYear=2020, DailyPrice=650000, Description="Bentley"},
+                new Car {CarId=1, BrandId=1, ColorId=2, ModelYear=1/*2016*/, DailyPrice=250000, Description="1"},//"BMW X6"},
+                new Car {CarId=2, BrandId=2, ColorId=3, ModelYear=1/*2017*/, DailyPrice=350000, Description="1"},//"Mercedes S600" },
+                new Car {CarId=3, BrandId=3, ColorId=4, ModelYear=1/*2018*/, DailyPrice=450000, Description="1"},//"Porche S4" },
+                new Car {CarId=4, BrandId=4, ColorId=5, ModelYear=1/*2019*/, DailyPrice=550000, Description="1"},//"Ferrari"  },
+                new Car {CarId=5, BrandId=5, ColorId=6, ModelYear=1/*2020*/, DailyPrice=650000, Description="1"} //"Bentley"},
             };
         }
 
