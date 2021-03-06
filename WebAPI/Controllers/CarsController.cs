@@ -14,18 +14,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class CarsController : ControllerBase
     {
         ICarService _carService;
 
-        public ProductsController(ICarService carService)
+        public CarsController(ICarService carService)
         {
             _carService = carService;
         }
 
-        [HttpGet]
 
-        public /*List<Car>*/ IActionResult Get()
+        [HttpGet("getall")]
+
+        public /*List<Car>*/ IActionResult GetAll()
         {
             //ICarService carService = new CarManager(new EfCarDal());
 
@@ -38,7 +39,23 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost]
+        [HttpGet("getbyid")]
+
+        public /*List<Car>*/ IActionResult GetById(int id)
+        {
+            //ICarService carService = new CarManager(new EfCarDal());
+
+            var result = _carService.GetById(id);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpPost("add")]
 
         public Car Add(Car car)
         {
@@ -48,7 +65,5 @@ namespace WebAPI.Controllers
 
             return null;// result;
         }
-
-
     }
 }
