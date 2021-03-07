@@ -31,8 +31,11 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<ICarService, CarManager>();
-            services.AddSingleton<ICarDal, /*InMemoryCarDal*/EfCarDal/**/>();
+
+            //services.AddSingleton<ICarService, CarManager>(); // business dependency de autofac olarak muadili yapýldý.
+            //services.AddSingleton<ICarDal, /*InMemoryCarDal*/EfCarDal/**/>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -16,23 +16,26 @@ namespace Console
     {
         static void Main(string[] args)
         {
+            Guid g = Guid.NewGuid();
+            System.Console.WriteLine(g);
+            System.Console.WriteLine(Guid.NewGuid());
+
+            for (int i = 0; i < int.MaxValue; i++)
+            {
+                System.Console.WriteLine(i);
+            }
+        }
+
+        private static void RentalUpdate()
+        {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
 
-            Rental rental1 = new Rental() { CarId=2, CustomerId = 2, RentDate = Convert.ToDateTime("05.03.2021") };
+            Rental rental1 = new Rental() { CarId = 2, CustomerId = 2, RentDate = Convert.ToDateTime("05.03.2021") };
 
-            Rental rental2 = new Rental() { Id=30, CustomerId = 2, RentDate = Convert.ToDateTime("05.03.2021"),  ReturnDate = Convert.ToDateTime("06.03.2021") };
+            Rental rental2 = new Rental() { Id = 30, CustomerId = 2, RentDate = Convert.ToDateTime("05.03.2021"), ReturnDate = Convert.ToDateTime("06.03.2021") };
 
-            Rental rental3 = new Rental() {};
-
-            //rentalManager.Add(rental3);
-
-            //rentalManager.Add(rental1);
+            Rental rental3 = new Rental() { };
             rentalManager.Update(rental2);
-            //rentalManager.Update(rental2);
-            //rentalManager.Delete(rental2);
-
-            //RentalGetAll();
-            //GetRentalDetails();
         }
 
         private static void RentalGetAll()

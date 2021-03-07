@@ -12,10 +12,13 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+
     public class CarsController : ControllerBase
     {
+
         ICarService _carService;
 
         public CarsController(ICarService carService)
@@ -26,7 +29,7 @@ namespace WebAPI.Controllers
 
         [HttpGet("getall")]
 
-        public /*List<Car>*/ IActionResult GetAll()
+        public IActionResult GetAll()
         {
             //ICarService carService = new CarManager(new EfCarDal());
 
@@ -39,12 +42,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+
         [HttpGet("getbyid")]
 
-        public /*List<Car>*/ IActionResult GetById(int id)
+        public IActionResult GetById(int id)
         {
-            //ICarService carService = new CarManager(new EfCarDal());
-
             var result = _carService.GetById(id);
 
             if (result.Success)
@@ -57,13 +59,15 @@ namespace WebAPI.Controllers
 
         [HttpPost("add")]
 
-        public Car Add(Car car)
+        public IActionResult Add(Car car)
         {
-            ICarService carService = new CarManager(new EfCarDal());
+            var result = _carService.Add(car);
 
-            var result = carService.Add(car);
-
-            return null;// result;
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
