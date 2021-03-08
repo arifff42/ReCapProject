@@ -9,6 +9,7 @@ using System.Linq;
 using Core.Utilities.Result.Concrete;
 using System;
 using System.Text;
+using System.IO;
 
 namespace Console
 {
@@ -17,13 +18,23 @@ namespace Console
         static void Main(string[] args)
         {
             Guid g = Guid.NewGuid();
-            System.Console.WriteLine(g);
-            System.Console.WriteLine(Guid.NewGuid());
+            //System.Console.WriteLine(g);
+            //System.Console.WriteLine(Guid.NewGuid());
 
-            for (int i = 0; i < int.MaxValue; i++)
-            {
-                System.Console.WriteLine(i);
-            }
+            //for (int i = 0; i < int.MaxValue; i++)
+            //{
+            //    System.Console.WriteLine(i);
+            //}
+
+            var result = System.IO.Directory.GetParent(Environment.CurrentDirectory).FullName;  //Environment.CurrentDirectory.Full
+            var result1 = Environment.CurrentDirectory;
+            System.Console.WriteLine(result);
+
+            //var sourcepath = Path.GetTempFileName();
+            //System.Console.WriteLine(sourcepath);
+
+            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
+            carImageManager.GetImagesByCarId(1);
         }
 
         private static void RentalUpdate()

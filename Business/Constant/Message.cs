@@ -17,6 +17,7 @@ namespace Business.Constant
         public static string ProductDeleted = "Ürün Silindi";
         public static string CarImageLimitExceded = "Resim Ekleme Limiti Aşıldı";
         public static string CarImagePathTypeIsFalse = "Farklı türde resim eklendi";
+        internal static string CarImagesListed;
     }
 }
 

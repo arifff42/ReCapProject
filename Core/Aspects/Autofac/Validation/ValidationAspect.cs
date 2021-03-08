@@ -27,9 +27,9 @@ namespace Core.Aspects.Autofac.Validation
         protected override void OnBefore(IInvocation invocation)
         {
             var validator = (IValidator)Activator.CreateInstance(_validatorType);
-
+            Console.WriteLine(validator);
             var entityType = _validatorType.BaseType.GetGenericArguments()[0]; // _VALIDATORTYPE== CarValidator : BASETYPE==AbstractValidator<Car>==GETGENERİCARGUMENTS LERİN İLKİ
-
+            Console.WriteLine(entityType);
             var entities = invocation.Arguments.Where(t => t.GetType() == entityType); //Methotdaki argümanları tara yukardaki argümana eşit olanı yakala
             
             foreach (var entity in entities)
