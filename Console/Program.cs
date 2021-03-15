@@ -35,6 +35,8 @@ namespace Console
 
             CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
             carImageManager.GetImagesByCarId(1);
+            
+
         }
 
         private static void RentalUpdate()

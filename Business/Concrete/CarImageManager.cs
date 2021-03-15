@@ -33,7 +33,7 @@ namespace Business.Concrete
         public IResult Add(CarImage carImage, IFormFile file)
         {
 
-            IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId)); //, CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
+            IResult result = BusinessRules.Run(CheckIfCarImageLimitedExceded(carImage.CarId), CheckIfCarImagePathTypeCorrect(carImage.ImagePath));
 
 
             if (result != null)
@@ -41,15 +41,19 @@ namespace Business.Concrete
                 return result;
             }
 
-
-            carImage.ImagePath = FileHelper.Add(file);
+            carImage.ImagePath = FileHelper.Add(carImage.CarId, file);
             carImage.Date = DateTime.Now;
 
+            if (carImage.ImagePath==null)
+            {
+
+            }
 
             _carImageDal.Add(carImage);
 
             return new SuccessResult(Message.ProductAdded);
         }
+
 
 
         [ValidationAspect(typeof(CarImageValidator))]
@@ -64,17 +68,11 @@ namespace Business.Concrete
                 return result;
             }
 
-            //carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
-
-            _carImageDal.Update(carImage);
-
-            return new SuccessResult(Message.ProductUpdated);
-
-            //carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file,carImage.CarId);
 
             //_carImageDal.Update(carImage);
 
-            //return new SuccessResult(Message.ProductUpdated);
+            return new SuccessResult(Message.ProductUpdated);
         }
 
 
@@ -82,7 +80,7 @@ namespace Business.Concrete
         {
             try
             {
-                File.Delete(carImage.ImagePath);
+                FileHelper.Delete(carImage.ImagePath);
             }
             catch (Exception exception)
             {
@@ -128,9 +126,7 @@ namespace Business.Concrete
 
             if (result != null)
             {
-                string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\Images\logo.png");
-
-                Console.WriteLine(path);
+                string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + $@"C:\Users\arif\source\repos\ReCapProject\Images\logo.png");
 
                 return new ErrorDataResult<List<CarImage>>(new List<CarImage>
 
@@ -138,11 +134,6 @@ namespace Business.Concrete
             }
 
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(cI => cI.CarId == carId), Message.CarImagesListed);
-
-
-            //var result = _carImageDal.GetAll(c => c.CarId == id);
-
-            //return new SuccessDataResult<List<CarImage>>(result);
         }
 
 
@@ -176,6 +167,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult();
             }
+
             return new SuccessResult();
         }
 
