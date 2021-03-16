@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,7 +18,13 @@ namespace Business.Constant
         public static string ProductDeleted = "Ürün Silindi";
         public static string CarImageLimitExceded = "Resim Ekleme Limiti Aşıldı";
         public static string CarImagePathTypeIsFalse = "Farklı türde resim eklendi";
-        internal static string CarImagesListed;
+        public static string CarImagesListed = "Araç Resimleri Listelendi";
+        public static string UserRegistered = "Üyelik Kabul Edildi";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Şifre Hatalı";
+        public static string SuccessfulLogin = "Başarılı Giriş";
+        public static string UserAlreadyExists = "Bu Mail Adresi Zaten Kayıtlı";
+        public static string AccessTokenCreated = "Token Üretildi";
     }
 }
 

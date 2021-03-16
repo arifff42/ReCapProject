@@ -3,6 +3,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,12 +75,12 @@ namespace Console
             carManager.Add(car1);
         }
 
-        private static void AddUser(UserManager userManager)
+        private static void AddUser(UserManager userManager) ///kendi yaptığım userde şimdi sisteme geçtik.
         {
             //UserManager userManager = new UserManager(new EfUserDal());
 
-            User user1 = new User() { FirstName = "Arif", LastName = "Yıldız", Email = "arif@elzem.com", Password = Encoding.ASCII.GetBytes("12345") };
-            userManager.Add(user1);
+            //User user1 = new User() { FirstName = "Arif", LastName = "Yıldız", Email = "arif@elzem.com", Password = Encoding.ASCII.GetBytes("12345") };
+            //userManager.Add(user1);
         }
 
         private static void AddBrand()
