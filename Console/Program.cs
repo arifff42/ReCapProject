@@ -78,7 +78,7 @@ namespace Console
         {
             //UserManager userManager = new UserManager(new EfUserDal());
 
-            User user1 = new User() { FirstName = "Arif", LastName = "Yıldız", Email = "arif@elzemwax.com", Password = Encoding.ASCII.GetBytes("12345") };
+            User user1 = new User() { FirstName = "Arif", LastName = "Yıldız", Email = "arif@elzem.com", Password = Encoding.ASCII.GetBytes("12345") };
             userManager.Add(user1);
         }
 
