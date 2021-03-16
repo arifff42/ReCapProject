@@ -41,7 +41,7 @@ namespace Business.Concrete
                 return result;
             }
 
-            carImage.ImagePath = FileHelper.Add(carImage.CarId, file);
+            carImage.ImagePath = FileHelper.Add(carImage.CarId, file); // Dosyaya resmi eklemek için
             carImage.Date = DateTime.Now;
 
             if (carImage.ImagePath==null)
@@ -49,7 +49,7 @@ namespace Business.Concrete
 
             }
 
-            _carImageDal.Add(carImage);
+            _carImageDal.Add(carImage); // SQL e resmi eklemek için
 
             return new SuccessResult(Message.ProductAdded);
         }
@@ -70,7 +70,7 @@ namespace Business.Concrete
 
             carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file,carImage.CarId);
 
-            //_carImageDal.Update(carImage);
+            _carImageDal.Update(carImage);
 
             return new SuccessResult(Message.ProductUpdated);
         }
@@ -80,7 +80,7 @@ namespace Business.Concrete
         {
             try
             {
-                FileHelper.Delete(carImage.ImagePath);
+                FileHelper.Delete(carImage.ImagePath); // Dosyadan resmi silmek için
             }
             catch (Exception exception)
             {
@@ -88,7 +88,7 @@ namespace Business.Concrete
                 return new ErrorResult(exception.Message);
             }
 
-            _carImageDal.Delete(carImage);
+            _carImageDal.Delete(carImage); // SQL den resmi silmek için
 
             return new SuccessResult(Message.ProductDeleted);
 
