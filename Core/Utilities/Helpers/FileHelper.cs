@@ -13,20 +13,10 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
-        //string folderName = @"C:\Users\arif\source\repos\ReCapProject\Images\Araç Resimleri";
-
-        //string SubName = @"C:\Users\arif\source\repos\ReCapProject\Images\Araç Resimleri";
-
-        //string path = @"c:\Temp\ConvertAngle\Angles.txt";
-
-        //string imza = @"c:\Temp\ConvertAngle\imza.txt";
-
-        //string log = @"c:\Temp\ConvertAngle\Log.txt";
 
         public static string folderName = @"C:\Users\arif\source\repos\ReCapProject\Images\Araç Resimleri";
         public static string Add(int Id, IFormFile file)
         {
-            //string folderName = @"C:\Users\arif\source\repos\ReCapProject\Images\Araç Resimleri";
 
             var sourcepath = Path.GetTempFileName();
 
