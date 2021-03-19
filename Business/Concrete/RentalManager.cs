@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete;
 using DataAccess.Abstract;
@@ -19,6 +20,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [SecuredOperation("rental.add,admin")]
         public IResult Add(Rental rental)
         {
             foreach (var p in _rentalDal.GetAll(p => p.CarId == rental.CarId).Where(p => p.ReturnDate == null)) 

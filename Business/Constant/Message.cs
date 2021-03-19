@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constant
@@ -25,6 +26,7 @@ namespace Business.Constant
         public static string SuccessfulLogin = "Başarılı Giriş";
         public static string UserAlreadyExists = "Bu Mail Adresi Zaten Kayıtlı";
         public static string AccessTokenCreated = "Token Üretildi";
+        public static string AuthorizationDenied = "Yetkini Yok";
     }
 }
 

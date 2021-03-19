@@ -34,10 +34,25 @@ namespace Console
             //var sourcepath = Path.GetTempFileName();
             //System.Console.WriteLine(sourcepath);
 
-            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
-            carImageManager.GetImagesByCarId(1);
-            
+            //CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
+            //carImageManager.GetImagesByCarId(1);
 
+            string roles = "ahmet,arif";
+            SecuredOperation(roles);
+            //System.Console.WriteLine(Convert.ToString(SecuredOperation(roles))); 
+
+
+        }
+
+        public static void SecuredOperation(string roles)
+        {
+            
+            var rol = roles.Split(',');
+            
+            foreach (var role in rol)
+            {
+                System.Console.WriteLine(role);
+            }
         }
 
         private static void RentalUpdate()
@@ -146,7 +161,7 @@ namespace Console
 
             foreach (var cars in carManager.GetAll().Data)
             {
-                System.Console.WriteLine(cars.CarId + "-"+cars.Description + "-" + cars.ModelYear + " ---> " + cars.DailyPrice);
+                System.Console.WriteLine(cars.CarId + "-" + cars.Description + "-" + cars.ModelYear + " ---> " + cars.DailyPrice);
             }
         }
     }
